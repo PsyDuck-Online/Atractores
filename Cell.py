@@ -17,15 +17,11 @@ class Cell:
                 if i != 0 or j != 0:
                     self.vecinos.append(tablero[yVecino][xVecino])
 
-    def nextGen(self):
+    def sumarVecinos(self):
         suma = 0
         for vecino in self.vecinos:
             suma = suma + vecino.estado
-        self.estadoSig = self.estado
-        if (suma < 2) or (suma > 3):
-            self.estadoSig = 0
-        if suma == 3:
-            self.estadoSig = 1
+        return suma
     
     def mutar(self):
         self.estado = self.estadoSig

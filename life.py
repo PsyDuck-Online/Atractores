@@ -10,13 +10,18 @@ def printMatriz(matriz):
         print("")
 
 
-def nextGen(matriz):
-    for y in range(0,len(matriz)):
-        for x in range(0,len(matriz)):
-            matriz[y][x].nextGen()
+def nextGen(matriz, sMin, sMax, bMin, bMax):
+    for y in range(0, len(matriz)):
+        for x in range(0, len(matriz)):
+            # Calculamos el siguiente estado de las celulas
+            suma = matriz[y][x].sumarVecinos()
+            if (suma < sMin) or (suma > sMax):
+                matriz[y][x].estadoSig = 0
+            if (suma >= bMin) and (suma <= bMax):
+                matriz[y][x].estadoSig = 1
 
-    for y in range(0,len(matriz)):
-        for x in range(0,len(matriz)):
+    for y in range(0, len(matriz)):
+        for x in range(0, len(matriz)):
             matriz[y][x].mutar()
 
 

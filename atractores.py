@@ -1,14 +1,19 @@
-import numpy as np
 from life import *
 from progress.bar import ChargingBar
 import sys
 
+# Reglas de LIFE
+sMin = 2
+sMax = 3
+bMin = 3
+bMax = 3
 
 def main():
     if len(sys.argv) == 3:
         nombre_archivo = sys.argv[1]
         N = int(sys.argv[2])
     else:
+        print("uso: python atractores.py <nombre_archivo> <N>")
         return
 
     f = open(nombre_archivo+"_nodos.csv", 'w')
@@ -21,7 +26,7 @@ def main():
     # Calcula la funcion de transicion
     for estado in range(0, combinaciones):
         tablero = numToMatriz(estado, N)
-        nextGen(tablero)
+        nextGen(tablero, sMin, sMax, bMin, bMax)
         estadoSig = matrizToNum(tablero, N)
         f.write("{},{}\n".format(estado, estado))
         f2.write("{},{}\n".format(estado, estadoSig))
@@ -30,17 +35,5 @@ def main():
     f2.close()
 
     print("")
-
-
-def estaEnLista(lista, val):
-    pos = 0
-    flag = False
-    for i in lista:
-        if i == val:
-            flag = True
-            break
-        pos = pos + 1
-    return pos if flag is True else -1
-
 
 main()
